@@ -1,4 +1,4 @@
-## Тестовое задание на оплачиваемую стажировку
+## Выпускной проект Topjava
 
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) **without frontend**.
 
