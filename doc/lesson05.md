@@ -123,6 +123,12 @@
 
 Можно не переопределять. Сделал только для явного указания всех используемых методов из наследуемого `CrudRepository`
 
+> Какой паттерн проектирования применён в классе DataJpaUserRepositoryImpl (декоратор/адаптер/другой)?:
+
+Вопрос интересный:) Я бы назвал это композицией с делегированием. Если бы стояла бизнес задача преобразовать `UserRepository` в `CrudUserRepository` то это был бы адаптер (у нас нет бизнес задачи, `CrudUserRepository`  - внутреняя фича нашей реализации `data-jpa`)
+Делегат интерфейсов не меняет, а прокси похож на делегата, но служит неявной подмены (часто прямо в рантайм). См. [ПАТТЕРНЫ
+ПРОЕКТИРОВАНИЯ](https://refactoring.guru/ru/design-patterns)
+
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 7. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFajd2Y2RLQVVJWUU">Spring кэш</a>
 #### Apply 5_8_spring_cache.patch
 > - Сделал миграцию на [Ehcache 3.x, compatibile with javax.cache API (JSR-107)](http://www.ehcache.org/)
