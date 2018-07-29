@@ -119,10 +119,6 @@
 
 ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) Вопросы:
 
-> Когда нужно ставить аннотацию `@Modifying`? Почему она стоит только над delete, но не над save?
-
-`@Modifying` ставится на модифицирующие `@Query`. Реализацию save можно посмотреть в `org.springframework.data.jpa.repository.support.SimpleJpaRepository#save()`, там она есть.
-
 > Зачем мы переопределяем `@Override Meal save` в `CrudUserRepository`. Без этого все работает.
 
 Можно не переопределять. Сделал только для явного указания всех используемых методов из наследуемого `CrudRepository`
