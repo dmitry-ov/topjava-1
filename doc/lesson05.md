@@ -140,7 +140,7 @@
 
 -  <a href="http://habrahabr.ru/post/113945/">Кеширование в Spring Framework</a>
 -  Дополнительно:
-   -  <a href="http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/cache.html">Spring cache Abstraction</a>
+   -  <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache">Spring cache Abstraction</a>
    -  <a href="http://habrahabr.ru/post/25140/">Распределённая система кеша ehcache</a>
    -  Починка JUnit: <a href="http://stackoverflow.com/questions/10013288/another-unnamed-cachemanager-already-exists-in-the-same-vm-ehcache-2-5">один кэш на JVM</a>
 
