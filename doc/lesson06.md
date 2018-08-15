@@ -107,7 +107,8 @@ C `@BatchSize(size = 200)` делается запрос на юзеров (1) �
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 5.  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFVE1jWkRucm1UTjA">Spring Web</a>
 #### Apply 6_11_spring_web.patch
 > - Для сборки проекта в окне Maven отключите тесты (`Toggele 'Skip Tests' Mode`)
-> - В `web.xml` задаются профили запуска по умолчанию: `<param-value>postgres,datajpa</param-value>`. Если запускаетесь под HSQLDB, надо поменять на `hsqldb,datajpa`.
+> - В `web.xml` задаются профили запуска по умолчанию: `<param-value>postgres,datajpa</param-value>`. 
+### Если запускаетесь под HSQLDB, надо поменять на `hsqldb,datajpa`.
 
 -  <a href="http://www.mkyong.com/servlet/what-is-listener-servletcontextlistener-example/">ServletContextListener</a>.
 -  <a href="https://docs.oracle.com/javaee/6/tutorial/doc/bnafi.html">Servlet Lifecycle</a>
