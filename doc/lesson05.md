@@ -39,6 +39,20 @@
 >   - <a href="http://stackoverflow.com/questions/5031614/the-jpa-hashcode-equals-dilemma">JPA hashCode()/equals() dilemma</a>
 >   - <a href="http://blog.xebia.com/advanced-hibernate-proxy-pitfalls/">Hibernate Proxy Pitfalls</a>
 
+------------------------
+
+> Переопределять `equals()/hashCode()` необходимо, если 
+> - использовать entity в `Set` (рекомендовано для many ассоциаций), либо как ключи в `HashMap`
+> - использовать _reattachment of detached instances_ (те манипулировать одним Entity в нескольких транзакциях/сессиях).
+
+> [Implementing equals() and hashCode()](https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/4.3/html/hibernate_reference_guide/persistent_classes-implementing_equals_and_hashcode)
+
+> Оптимально использовать уникальные бизнес поля, но обычно таких нет, и чаще всего, используются PK с ограничением, что он может быть `null` у новых объектов и нельзя объекты сравнивать через `equals() and hashCode()` в бизнес-логике (например тестах).
+
+> [equals() and hashcode() when using JPA and Hibernate](https://stackoverflow.com/questions/1638723)
+
+------------------------
+
 > ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) Почему над `AbstractBaseEntity` стоит `@Access(AccessType.FIELD)` ? Почему при запросе `user.id` нам не нужно вытаскивать его из базы?
 
 `AccessType.FIELD` делает доступ в `AbstractBaseEntity` и всех классах-наследниках по полям. При загрузке `Meal` Hibernate на основе поля `meal.user_id` делает ленивую прокcи к `User`, у которой нет ничего, кроме id.
