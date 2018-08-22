@@ -21,7 +21,7 @@
 - [Persistent classes implementing equals and hashcode](https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/4.3/html/hibernate_reference_guide/persistent_classes-implementing_equals_and_hashcode): переопределять `equals()/hashCode()` необходимо, если
   - использовать Entity в `Set` (рекомендовано для many ассоциаций), либо как ключи в `HashMap`
   - использовать _reattachment of detached instances_ (те манипулировать одним Entity в нескольких транзакциях/сессиях).
-- Оптимально использовать уникальные бизнес поля, но обычно таких нет, и, чаще всего, используются PK с ограничением, что он может быть `null` у новых объектов и нельзя объекты сравнивать через `equals` в бизнес-логике (например тестах).
+- Оптимально использовать уникальные неизменяемые бизнес поля, но обычно таких нет, и, чаще всего, используются PK с ограничением, что он может быть `null` у новых объектов и нельзя объекты сравнивать через `equals` в бизнес-логике (например тестах).
 [Equals() and hashcode() when using JPA and Hibernate](https://stackoverflow.com/questions/1638723)
 ------------------------
 
