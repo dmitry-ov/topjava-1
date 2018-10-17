@@ -9,6 +9,8 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealWithExceed;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -40,15 +42,19 @@ public class MealRestController extends AbstractMealController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> creates(@RequestBody Meal meal) {
+    public ResponseEntity<Meal> createMeal(@RequestBody Meal meal) {
         Meal created = super.create(meal);
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
-        return ResponseEntity.created(uriOfNewResource).body(created);
+        return ResponseEntity.created(uri).body(created);
     }
 
-
-
-    //MediaType.APPLICATION_JSON_VALUE
+    @GetMapping(value = "/filter", params = {"startDate", "startTime", "endDate", "endTime"})
+    public List<MealWithExceed> getBetween(@RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                           @RequestParam(value = "startTime", required = false) LocalTime startTime,
+                                           @RequestParam(value = "endDate", required = false) LocalDate endDate,
+                                           @RequestParam(value = "endTime", required = false) LocalTime endTime) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
+    }
 }
