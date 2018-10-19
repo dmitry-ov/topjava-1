@@ -43,7 +43,7 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getTest() throws Exception {
-        mockMvc.perform(get(REST_URL + MealTestData.MEAL1.getId()))
+        mockMvc.perform(get(REST_URL + MealTestData.MEAL1_ID))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -52,19 +52,16 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void deleteTest() throws Exception {
-        final List<Meal> newMeals = MEALS.stream().filter(meal -> !Objects.equals(meal.getId(), MEAL1_ID))
-                .collect(Collectors.toList());
-
-        mockMvc.perform(delete(REST_URL + MealTestData.MEAL1.getId()))
+                mockMvc.perform(delete(REST_URL + MealTestData.MEAL1_ID))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        assertMatch(mealService.getAll(USER_ID), newMeals);
+        assertMatch(mealService.getAll(USER_ID), MEAL6, MEAL5, MEAL4, MEAL3, MEAL2);
     }
 
     @Test
     void updateTest() throws Exception {
-        final Meal updated = MealTestData.MEAL1;
+        final Meal updated = mealService.get(MEAL1_ID, USER_ID);
         updated.setCalories(100);
         updated.setDescription("new Description");
 
