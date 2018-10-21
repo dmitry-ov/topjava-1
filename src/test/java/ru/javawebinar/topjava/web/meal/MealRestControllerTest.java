@@ -12,10 +12,6 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -87,10 +83,20 @@ class MealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void getBetweenTest() throws Exception {
+    void getBetweenEmptyTest() throws Exception {
         mockMvc.perform(get(REST_URL + "filter?startDate=&startTime=&endDate=&endTime="))
                 .andExpect(status().isOk())
                 .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(JsonUtil.writeValue(MealsUtil.getWithExceeded(MEALS, USER.getCaloriesPerDay()))));
+    }
+
+    @Test
+    void getBetweenFullTest() throws Exception {
+        mockMvc.perform(get(REST_URL
+                + "filter?startDate=2015-05-30&startTime=01:00:00&endDate=2015-05-31&endTime=23:00:00"))
+                .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(JsonUtil.writeValue(MealsUtil.getWithExceeded(MEALS, USER.getCaloriesPerDay()))));
     }
