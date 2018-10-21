@@ -24,4 +24,8 @@
 `curl http://localhost:8080/rest/meals/filter/?startDate=&startTime=&endDate=&endTime=`
 
 
+- filter 
+
+`curl -X GET 'http://localhost:8080/rest/meals/filter?startDate=2015-05-30&startTime=01:00&endDate=2015-05-30&endTime=23:00'`
+`curl -X GET 'http://localhost:8080/rest/meals/filter'`
 
