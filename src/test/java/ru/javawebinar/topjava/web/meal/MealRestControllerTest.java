@@ -12,6 +12,8 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,9 +33,10 @@ class MealRestControllerTest extends AbstractControllerTest {
     @Test
     void getAllTest() throws Exception {
         mockMvc.perform(get(REST_URL))
-                .andExpect(status().isOk())
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(contentJson(MealTestData.MEALS));
     }
 
@@ -48,7 +51,7 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void deleteTest() throws Exception {
-                mockMvc.perform(delete(REST_URL + MealTestData.MEAL1_ID))
+        mockMvc.perform(delete(REST_URL + MealTestData.MEAL1_ID))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
@@ -57,16 +60,17 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void updateTest() throws Exception {
-        final Meal updated = mealService.get(MEAL1_ID, USER_ID);
+        final Meal meal = new Meal(LocalDateTime.now(), "new Description", 99);
+        final Meal updated = mealService.create(meal, USER_ID);
+        updated.setDescription("updated Description");
         updated.setCalories(100);
-        updated.setDescription("new Description");
 
-        mockMvc.perform(put(REST_URL + MealTestData.MEAL1.getId())
+        mockMvc.perform(put(REST_URL + updated.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
 
-        assertMatch(mealService.get(MealTestData.MEAL1_ID, USER_ID), updated);
+        assertMatch(mealService.get(updated.getId(), USER_ID), updated);
     }
 
     @Test
