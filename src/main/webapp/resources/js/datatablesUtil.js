@@ -3,10 +3,6 @@ function makeEditable() {
         deleteRow($(this).attr("id"));
     });
 
-    $(".deleteMeal").click(function () {
-        deleteRow($(this).attr("id"));
-    });
-
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
     });

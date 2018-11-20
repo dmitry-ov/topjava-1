@@ -1,15 +1,13 @@
 var ajaxUrl = "/ajax/profile/meals/";
 var datatableApi;
 
-// $(document).ready(function () {
 $(function () {
     datatableApi = $("#datatable").DataTable({
         "paging": false,
         "info": true,
-
         "columns": [
             {
-                "data": "datetime"
+                "data": "dateTime"
             },
             {
                 "data": "description"
@@ -29,7 +27,7 @@ $(function () {
         "order": [
             [
                 0,
-                "asc"
+                "desc"
             ]
         ]
     });
