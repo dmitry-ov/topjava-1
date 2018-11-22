@@ -3,17 +3,17 @@ var filter = "filter/";
 
 var datatableApi;
 
-$("#filter").submit(function () {
+function filterMeals() {
     $.ajax({
         url: ajaxUrl + filter,
         type: "POST",
         data: $("#filter").serialize(),
         success: function (data) {
-            // updateTable();
+            datatableApi.clear();
             successNoty("Filtered");
         }
     });
-});
+}
 
 $(function () {
     datatableApi = $("#datatable").DataTable({

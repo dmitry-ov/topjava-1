@@ -16,7 +16,7 @@
     <div class="jumbotron pt-4">
         <div class="container">
 
-            <form id="filter">
+            <form action="/ajax/profile/meals/filter" method="post" id="filter">
                 <dl>
                     <dt><spring:message code="meal.startDate"/>:</dt>
                     <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
@@ -33,7 +33,7 @@
                     <dt><spring:message code="meal.endTime"/>:</dt>
                     <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
                 </dl>
-                <button type="submit"><spring:message code="meal.filter"/></button>
+                <button type="button" onclick="filterMeals()"><spring:message code="meal.filter"/></button>
             </form>
 
 
