@@ -33,7 +33,8 @@
                     <dt><spring:message code="meal.endTime"/>:</dt>
                     <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
                 </dl>
-                <button type="button" onclick="filterMeals()"><spring:message code="meal.filter"/></button>
+                <button type="button" class="btn btn-light" onclick="filterMeals()"><spring:message code="meal.filter"/></button>
+                <button type="button" class="btn btn-warning" onclick="filterReset()"><spring:message code="meal.filter.reset"/></button>
             </form>
 
 
@@ -49,7 +50,6 @@
                     <th><spring:message code="meal.description"/></th>
                     <th><spring:message code="meal.calories"/></th>
                     <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <c:forEach items="${meals}" var="meal">
@@ -63,7 +63,7 @@
                         </td>
                         <td>${meal.description}</td>
                         <td>${meal.calories}</td>
-                        <td><button onclick="deleteRow(${meal.id})"><span class="fa fa-remove"></span></button></td>
+                        <td><button onclick="deleteRow(${meal.id})"><span class="fa fa-edit"></span></button></td>
                     </tr>
                 </c:forEach>
             </table>

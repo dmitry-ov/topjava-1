@@ -9,10 +9,14 @@ function filterMeals() {
         type: "POST",
         data: $("#filter").serialize(),
         success: function (data) {
-            datatableApi.clear();
+            datatableApi.clear().rows.add(data).draw();
             successNoty("Filtered");
         }
     });
+}
+
+function filterReset(){
+    $("#filter").find(":input").val("");
 }
 
 $(function () {
@@ -32,10 +36,6 @@ $(function () {
             {
                 "defaultContent": "Edit",
                 "orderable": false
-            },
-            {
-                "defaultContent": "Delete",
-                "orderable": false
             }
         ],
         "order": [
@@ -45,5 +45,6 @@ $(function () {
             ]
         ]
     });
+
     makeEditable();
 });
