@@ -40,7 +40,7 @@ public class AdminAjaxController extends AbstractUserController {
     @Transactional
     public boolean changeUserEnableState(@PathVariable("id") int id) {
         User user = super.get(id);
-        final boolean newState = user.isEnabled() ? false : true;
+        final boolean newState = !user.isEnabled();
         user.setEnabled(newState);
         super.update(user, id);
         return newState;

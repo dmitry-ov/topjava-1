@@ -13,7 +13,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 public abstract class AbstractUserServiceTest extends AbstractServiceTest {
@@ -87,5 +89,28 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     void getAll() throws Exception {
         List<User> all = service.getAll();
         assertMatch(all, ADMIN, USER);
+    }
+
+    @Test
+    void disable() throws Exception {
+        final boolean newState = false;
+        final User enableUser = service.get(USER_ID);
+        enableUser.setEnabled(newState);
+        service.update(enableUser);
+
+        assertEquals(service.get(USER_ID).isEnabled(), newState);
+    }
+
+    @Test
+    void enable() throws Exception {
+        final User enableUser = service.get(USER_ID);
+
+        enableUser.setEnabled(!enableUser.isEnabled());
+        service.update(enableUser); // user disable
+
+        enableUser.setEnabled(!enableUser.isEnabled());
+        service.update(enableUser); // user enable
+
+        assertTrue(service.get(USER_ID).isEnabled());
     }
 }

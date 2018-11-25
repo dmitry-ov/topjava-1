@@ -8,11 +8,14 @@ function changeEnableState(id) {
         url: ajaxUrl + changeUrl + "/" + id,
         type: "POST",
         success: function (data) {
-            let selector = '.' + id;
+            let selectorTh = '.' + id;
+            let selectorCheckBox = '#' + id;
             if (data == true) {
-                $(selector).css('background-color', 'blue');
+                $(selectorTh).css('background-color', '');
+                $(selectorCheckBox).prop('checked', true);
             } else {
-                $(selector).css('background-color', '');
+                $(selectorTh).css('background-color', 'yellow');
+                $(selectorCheckBox).prop('checked', false);
             }
         }
     });
